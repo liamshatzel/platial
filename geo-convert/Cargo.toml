@@ -1,0 +1,10 @@
+[package]
+name = "geo-convert"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+geo = "0.30.0"
+geojson = "0.24.2"
+kml = "0.9.1"
+thiserror = "2.0.12"
