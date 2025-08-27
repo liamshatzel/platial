@@ -1,0 +1,11 @@
+/Users/liamshatzel/code/platial/geo-convert/target/debug/deps/libbzip2-c4cf49cda63ee45c.rmeta: /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/lib.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/mem.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/bufread.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/read.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/write.rs
+
+/Users/liamshatzel/code/platial/geo-convert/target/debug/deps/libbzip2-c4cf49cda63ee45c.rlib: /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/lib.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/mem.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/bufread.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/read.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/write.rs
+
+/Users/liamshatzel/code/platial/geo-convert/target/debug/deps/bzip2-c4cf49cda63ee45c.d: /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/lib.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/mem.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/bufread.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/read.rs /Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/write.rs
+
+/Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/lib.rs:
+/Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/mem.rs:
+/Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/bufread.rs:
+/Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/read.rs:
+/Users/liamshatzel/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bzip2-0.5.2/src/write.rs:

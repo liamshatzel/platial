@@ -61,6 +61,7 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
         const map = new Map({
             layers: [raster, vector],
             target: mapRef.current,
+            controls: [], // Remove all default controls
             view: new View({
                 center: [-11000000, 4600000],
                 zoom: 4,
