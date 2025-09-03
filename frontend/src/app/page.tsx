@@ -40,8 +40,6 @@ export default function Home() {
           try {
             const geojson = JSON.parse(content);
             console.log('Parsed GeoJSON:', geojson);
-            // You can set this to state if needed
-            // setGeojson(geojson);
           } catch (jsonError) {
             console.log('Not valid JSON, might be a different format');
             console.log('File content:', content);
