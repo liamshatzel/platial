@@ -1,0 +1,77 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sample Polygon",
+                "description": "A test polygon for GeoJSON rendering"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -122.4194,
+                            37.7749
+                        ],
+                        [
+                            -122.4094,
+                            37.7749
+                        ],
+                        [
+                            -122.4094,
+                            37.7849
+                        ],
+                        [
+                            -122.4194,
+                            37.7849
+                        ],
+                        [
+                            -122.4194,
+                            37.7749
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sample Point",
+                "description": "A test point for GeoJSON rendering"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.4144,
+                    37.7749
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sample Line",
+                "description": "A test line for GeoJSON rendering"
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -122.4244,
+                        37.7649
+                    ],
+                    [
+                        -122.4044,
+                        37.7649
+                    ],
+                    [
+                        -122.4044,
+                        37.7849
+                    ]
+                ]
+            }
+        }
+    ]
+}

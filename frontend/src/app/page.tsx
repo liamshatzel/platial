@@ -11,7 +11,7 @@ export default function Home() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [selectedDrawType, setSelectedDrawType] = useState<string>("Polygon");
   const [file, setFile] = useState<File | null>(null);
-  //const [geojson, setGeojson] = useState<GeoJSON.Feature>(null);
+  const [geojson, setGeojson] = useState<any>(null);
 
   const handleHomeClick = () => {
     setIsHomeActive(!isHomeActive);
@@ -38,8 +38,9 @@ export default function Home() {
         if (typeof content === 'string') {
           // Try to parse as GeoJSON first
           try {
-            const geojson = JSON.parse(content);
-            console.log('Parsed GeoJSON:', geojson);
+            const parsedGeojson = JSON.parse(content);
+            console.log('Parsed GeoJSON:', parsedGeojson);
+            setGeojson(parsedGeojson);
           } catch (jsonError) {
             console.log('Not valid JSON, might be a different format');
             console.log('File content:', content);
@@ -69,7 +70,7 @@ export default function Home() {
         />
         <div className={`flex flex-col items-center justify-center h-full transition-all duration-300 ease-in-out ${isSidebarVisible ? 'w-[calc(100%-20rem)]' : 'w-full'
           }`}>
-          <MapDraw drawType={selectedDrawType} isHomeActive={isHomeActive} onHomeReset={handleHomeReset} />
+          <MapDraw drawType={selectedDrawType} isHomeActive={isHomeActive} onHomeReset={handleHomeReset} geojsonData={geojson} />
         </div>
       </div>
     </div>
