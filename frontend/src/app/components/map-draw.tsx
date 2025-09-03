@@ -11,14 +11,17 @@ import VectorLayer from 'ol/layer/Vector.js';
 import { get } from 'ol/proj.js';
 import OSM from 'ol/source/OSM.js';
 import VectorSource from 'ol/source/Vector.js';
+import GeoJSON from 'ol/format/GeoJSON.js';
+import { Style, Fill, Stroke, Circle } from 'ol/style.js';
 
 interface MapDrawProps {
     drawType: string;
     isHomeActive: boolean;
     onHomeReset?: () => void;
+    geojsonData?: any;
 }
 
-const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }) => {
+const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset, geojsonData }) => {
     const mapRef = useRef<HTMLDivElement>(null);
     const mapInstanceRef = useRef<Map | null>(null);
     const drawRef = useRef<Draw | null>(null);
@@ -32,7 +35,7 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
             source: new OSM(),
         });
 
-        // Create vector source and layer
+        // Create vector source and layer for drawing
         const source = new VectorSource();
         const vector = new VectorLayer({
             source: source,
@@ -43,6 +46,27 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
                 'circle-radius': 7,
                 'circle-fill-color': '#ffcc33',
             },
+        });
+
+        // Create GeoJSON source and layer for uploaded data
+        const geojsonSource = new VectorSource();
+        const geojsonLayer = new VectorLayer({
+            source: geojsonSource,
+            style: new Style({
+                fill: new Fill({
+                    color: 'rgba(255, 0, 0, 0.3)',
+                }),
+                stroke: new Stroke({
+                    color: '#ff0000',
+                    width: 2,
+                }),
+                image: new Circle({
+                    radius: 7,
+                    fill: new Fill({
+                        color: '#ff0000',
+                    }),
+                }),
+            }),
         });
 
         // Limit multi-world panning to one world east and west of the real world.
@@ -59,7 +83,7 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
 
         // Create map instance
         const map = new Map({
-            layers: [raster, vector],
+            layers: [raster, geojsonLayer, vector],
             target: mapRef.current,
             controls: [], // Remove all default controls
             view: new View({
@@ -92,13 +116,44 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
     useEffect(() => {
         if (mapInstanceRef.current) {
             const layers = mapInstanceRef.current.getLayers();
-            const vectorLayer = layers.getArray()[1] as VectorLayer<VectorSource>;
+            const vectorLayer = layers.getArray()[2] as VectorLayer<VectorSource>;
             const source = vectorLayer.getSource();
             if (source) {
                 addInteractions(mapInstanceRef.current, source, drawType);
             }
         }
     }, [drawType]);
+
+    // Handle GeoJSON data changes
+    useEffect(() => {
+        if (mapInstanceRef.current && geojsonData) {
+            const layers = mapInstanceRef.current.getLayers();
+            const geojsonLayer = layers.getArray()[1] as VectorLayer<VectorSource>;
+            const geojsonSource = geojsonLayer.getSource();
+
+            if (geojsonSource) {
+                // Clear existing features
+                geojsonSource.clear();
+
+                // Parse and add new GeoJSON features
+                const format = new GeoJSON();
+                const features = format.readFeatures(geojsonData, {
+                    featureProjection: 'EPSG:3857'
+                });
+
+                geojsonSource.addFeatures(features);
+
+                // Fit the map view to show all features
+                if (features.length > 0) {
+                    const extent = geojsonSource.getExtent();
+                    mapInstanceRef.current.getView().fit(extent, {
+                        padding: [50, 50, 50, 50],
+                        duration: 1000
+                    });
+                }
+            }
+        }
+    }, [geojsonData]);
 
     const addInteractions = (map: Map, source: VectorSource, type: string) => {
         // Remove existing interactions
@@ -129,11 +184,21 @@ const MapDraw: React.FC<MapDrawProps> = ({ drawType, isHomeActive, onHomeReset }
             view.setCenter([0, 0]);
             view.setZoom(0);
             const layers = mapInstanceRef.current.getLayers();
-            const vectorLayer = layers.getArray()[1] as VectorLayer<VectorSource>;
+
+            // Clear drawing layer
+            const vectorLayer = layers.getArray()[2] as VectorLayer<VectorSource>;
             const source = vectorLayer.getSource();
             if (source) {
                 source.clear();
             }
+
+            // Clear GeoJSON layer
+            const geojsonLayer = layers.getArray()[1] as VectorLayer<VectorSource>;
+            const geojsonSource = geojsonLayer.getSource();
+            if (geojsonSource) {
+                geojsonSource.clear();
+            }
+
             // Call the callback to reset the home state in parent
             onHomeReset?.();
         }
